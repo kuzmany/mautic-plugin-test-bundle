@@ -26,7 +26,7 @@ class PluginTest
     /**
      * @var Lead
      */
-    protected $lead;
+    protected $contact;
 
 
     public function __construct()
@@ -42,12 +42,7 @@ class PluginTest
         $builder->setTable('plugintest')
             ->setCustomRepositoryClass(PluginTest::class);
         $builder->addIdColumns(null, null);
-        $builder->createManyToOne(
-            'lead',
-            Lead::class
-        )->addJoinColumn('lead_id', 'id', true, false, 'SET NULL')
-            ->cascadePersist()
-            ->build();
+        $builder->addContact();
     }
 
 
@@ -82,17 +77,18 @@ class PluginTest
     /**
      * @return Lead
      */
-    public function getLead(): Lead
+    public function getContact(): Lead
     {
-        return $this->lead;
+        return $this->contact;
     }
 
     /**
-     * @param Lead $lead
+     * @param Lead $contact
      */
-    public function setLead(Lead $lead): void
+    public function setContact(Lead $contact): void
     {
-        $this->lead = $lead;
+        $this->contact = $contact;
     }
+
 
 }
